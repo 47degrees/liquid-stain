@@ -90,12 +90,12 @@ object chapter5 {
   } ensuring { noneOrSatisfies[Sparse[A]](_.spDim == dim)(_) }
 
   def plus(xs: Sparse[BigInt], ys: Sparse[BigInt]): Sparse[BigInt] = {
-    require(xs.spDim == ys.spDim)
+    require(xs.spDim > 0 && xs.spDim == ys.spDim)
 
     val dim = xs.spDim
 
     def findValue(ts: Sparse[BigInt], i: BigInt): BigInt = {
-      require(btwn(0, ts.spDim, i))
+      require(btwn(0, dim, i))
 
       def go(xs: List[(BigInt, BigInt)]): BigInt = {
         xs match {
@@ -108,6 +108,8 @@ object chapter5 {
     }
 
     def add(n: BigInt): List[(BigInt, BigInt)] = {
+      require(btwn(0, dim+1, n))
+
       if (n >= dim) {
         Nil[(BigInt, BigInt)]()
       } else {
