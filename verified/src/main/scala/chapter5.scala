@@ -172,4 +172,24 @@ object chapter5 {
   def badBST: Tree = {
     Node(Node(Leaf, 4, Leaf), 3, Node(Leaf, 5, Leaf))
   } ensuring { _.isBST }
+
+  sealed abstract class BST2 {
+    def min: BigInt = this match {
+      case Leaf2(x) => x
+      case Node2(l,_,_) => l.min
+    }
+    def max: BigInt = this match {
+      case Leaf2(x) => x
+      case Node2(_,_,r) => r.max
+    }
+  }
+  case class Leaf2(x: BigInt) extends BST2
+  case class Node2(l: BST2, x: BigInt, r: BST2) extends BST2 {
+    @invariant
+    def bstOk: Boolean = l.max <= x && x < r.min 
+  }
+
+  def badBST2: BST2 = {
+    Node2(Node2(Leaf2(2), 4, Leaf2(5)), 3, Leaf2(7))
+  }
 }
