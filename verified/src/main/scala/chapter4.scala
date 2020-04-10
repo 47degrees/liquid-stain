@@ -111,7 +111,5 @@ object chapter4 {
     def safeLookup[A](v: Vec[A], i: BigInt): Option[A] = {
       if(validIndex(i,v.size)) Some(v.lookup(i)) else None[A]
     }
-
-
   }
 }

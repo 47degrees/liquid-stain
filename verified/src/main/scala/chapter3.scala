@@ -13,8 +13,8 @@ object chapter3 {
 
   /*
   {-@ type Nat   = {v:BigInt | 0 <= v}        @-}
-{-@ type Even  = {v:BigInt | v mod 2 == 0 } @-}
-{-@ type Lt100 = {v:BigInt | v < 100}       @-}
+  {-@ type Even  = {v:BigInt | v mod 2 == 0 } @-}
+  {-@ type Lt100 = {v:BigInt | v < 100}       @-}
   */
 
   def nat(x: BigInt)   = 0 <= x
