@@ -7,7 +7,7 @@ on:
       - master
 
 jobs:
-  type_check:
+  build_and_verify:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
