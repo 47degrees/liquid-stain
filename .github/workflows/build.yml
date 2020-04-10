@@ -18,8 +18,8 @@ jobs:
           architecture: x64
       - name: Get Z3
         run: |
-        sudo apt-get update
-        sudo apt-get install z3
+            sudo apt-get update
+            sudo apt-get install z3
       - name: Compile
         run: sbt compile
       - name: Verify
