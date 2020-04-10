@@ -1,0 +1,26 @@
+name: Build and Verify
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  build_and_verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up Sbt
+        uses: olafurpg/setup-scala@v5
+        with:
+          java-version: adopt@v8
+          architecture: x64
+      - name: Get Z3
+        run: |
+            sudo apt-get update
+            sudo apt-get install z3
+      - name: Compile
+        run: sbt compile
+      - name: Verify
+        run: sbt verified/run
