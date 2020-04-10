@@ -13,18 +13,27 @@ object chapter2 {
     }
   } ensuring (res => res == (!p || q))
 
+  def <=>(p: Boolean, q: Boolean) = {
+    (p, q) match {
+      case (true,  true)  => true
+      case (true,  false) => false
+      case (false, true)  => false
+      case (false, false) => true
+    }
+  } ensuring (res => res == (p == q))
+
   // holds is equivalent to ensuring { (res: Boolean) => res }
   def ex0a: Boolean = { true } holds
-  def ex0b: Boolean = { false } holds
+  def ex0b: Boolean = { false } ensuring { res => !res}
 
   def ex1(p: Boolean) = { p || !p } holds
-  def ex2(p: Boolean) = { p && !p } holds
+  def ex2(p: Boolean) = { p && !p } ensuring { res => res == false }
 
   def ex3(p: Boolean, q: Boolean) = { (p && q) ==> p } holds
   def ex4(p: Boolean, q: Boolean) = { (p && q) ==> q } holds
 
   def ax0a: Boolean = { 1 + 1 == 2 } holds
-  def ax0b: Boolean = { 1 + 1 == 3 } holds
+  def ax0b: Boolean = { 1 + 1 == 3 } ensuring { res => res == false }
 
   // If we use Int, overflow is taken into account!
   def ax1(x: BigInt) = { x < x + 1 } holds

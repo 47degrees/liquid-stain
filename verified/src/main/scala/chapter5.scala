@@ -191,5 +191,5 @@ object chapter5 {
 
   def badBST2: BST2 = {
     Node2(Node2(Leaf2(2), 4, Leaf2(5)), 3, Leaf2(7))
-  }
+  } ensuring { !_.bstOk }
 }
